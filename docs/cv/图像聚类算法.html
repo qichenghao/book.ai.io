@@ -203,7 +203,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h5 id="&#x805A;&#x7C7B;&#x7684;&#x5E38;&#x89C1;&#x7B97;&#x6CD5;">&#x805A;&#x7C7B;&#x7684;&#x5E38;&#x89C1;&#x7B97;&#x6CD5;</h5>
+                                <h4 id="&#x805A;&#x7C7B;&#x7684;&#x5E38;&#x89C1;&#x7B97;&#x6CD5;">&#x805A;&#x7C7B;&#x7684;&#x5E38;&#x89C1;&#x7B97;&#x6CD5;</h4>
 <ol>
 <li>&#x539F;&#x578B;&#x805A;&#x7C7B;<ul>
 <li>K&#x5747;&#x503C;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;</li>
@@ -214,7 +214,7 @@
 <li>&#x5C42;&#x6B21;&#x805A;&#x7C7B;</li>
 <li>&#x5BC6;&#x5EA6;&#x805A;&#x7C7B;</li>
 </ol>
-<h6 id="k-means&#x805A;&#x7C7B;&#x7B97;&#x6CD5;">K-Means&#x805A;&#x7C7B;&#x7B97;&#x6CD5;</h6>
+<h5 id="k-means&#x805A;&#x7C7B;&#x7B97;&#x6CD5;">K-Means&#x805A;&#x7C7B;&#x7B97;&#x6CD5;</h5>
 <ul>
 <li><p>K-Means&#x7B97;&#x6CD5;&#x662F;&#x4E00;&#x79CD;&#x539F;&#x578B;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;    </p>
 </li>
@@ -285,8 +285,99 @@ compactness, labels,centers = cv2.kmeans(data, <span class="hljs-number">2</span
 </li>
 <li><p>sklean&#x7248;&#x672C;</p>
 <blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans
+
+<span class="hljs-string">&quot;&quot;&quot;
+&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#xFF1A;&#x6570;&#x636E;&#x96C6;
+X&#x8868;&#x793A;&#x4E8C;&#x7EF4;&#x77E9;&#x9635;&#x6570;&#x636E;&#xFF0C;&#x7BEE;&#x7403;&#x8FD0;&#x52A8;&#x5458;&#x6BD4;&#x8D5B;&#x6570;&#x636E;
+&#x603B;&#x5171;20&#x884C;&#xFF0C;&#x6BCF;&#x884C;&#x4E24;&#x5217;&#x6570;&#x636E;
+&#x7B2C;&#x4E00;&#x5217;&#x8868;&#x793A;&#x7403;&#x5458;&#x6BCF;&#x5206;&#x949F;&#x52A9;&#x653B;&#x6570;&#xFF1A;assists_per_minute
+&#x7B2C;&#x4E8C;&#x5217;&#x8868;&#x793A;&#x7403;&#x5458;&#x6BCF;&#x5206;&#x949F;&#x5F97;&#x5206;&#x6570;&#xFF1A;points_per_minute
+&quot;&quot;&quot;</span>
+X = [[<span class="hljs-number">0.0888</span>, <span class="hljs-number">0.5885</span>],
+     [<span class="hljs-number">0.1399</span>, <span class="hljs-number">0.8291</span>],
+     [<span class="hljs-number">0.0747</span>, <span class="hljs-number">0.4974</span>],
+     [<span class="hljs-number">0.0983</span>, <span class="hljs-number">0.5772</span>],
+     [<span class="hljs-number">0.1276</span>, <span class="hljs-number">0.5703</span>],
+     [<span class="hljs-number">0.1671</span>, <span class="hljs-number">0.5835</span>],
+     [<span class="hljs-number">0.1306</span>, <span class="hljs-number">0.5276</span>],
+     [<span class="hljs-number">0.1061</span>, <span class="hljs-number">0.5523</span>],
+     [<span class="hljs-number">0.2446</span>, <span class="hljs-number">0.4007</span>],
+     [<span class="hljs-number">0.1670</span>, <span class="hljs-number">0.4770</span>],
+     [<span class="hljs-number">0.2485</span>, <span class="hljs-number">0.4313</span>],
+     [<span class="hljs-number">0.1227</span>, <span class="hljs-number">0.4909</span>],
+     [<span class="hljs-number">0.1240</span>, <span class="hljs-number">0.5668</span>],
+     [<span class="hljs-number">0.1461</span>, <span class="hljs-number">0.5113</span>],
+     [<span class="hljs-number">0.2315</span>, <span class="hljs-number">0.3788</span>],
+     [<span class="hljs-number">0.0494</span>, <span class="hljs-number">0.5590</span>],
+     [<span class="hljs-number">0.1107</span>, <span class="hljs-number">0.4799</span>],
+     [<span class="hljs-number">0.1121</span>, <span class="hljs-number">0.5735</span>],
+     [<span class="hljs-number">0.1007</span>, <span class="hljs-number">0.6318</span>],
+     [<span class="hljs-number">0.2567</span>, <span class="hljs-number">0.4326</span>],
+     [<span class="hljs-number">0.1956</span>, <span class="hljs-number">0.4280</span>]   
+    ]
+<span class="hljs-string">&quot;&quot;&quot;
+&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#xFF1A;KMeans&#x805A;&#x7C7B;
+clf = KMeans(n_clusters=3) &#x8868;&#x793A;&#x7C7B;&#x7C07;&#x6570;&#x4E3A;3&#xFF0C;&#x805A;&#x6210;3&#x7C7B;&#x6570;&#x636E;&#xFF0C;clf&#x5373;&#x8D4B;&#x503C;&#x4E3A;KMeans
+y_pred = clf.fit_predict(X) &#x8F7D;&#x5165;&#x6570;&#x636E;&#x96C6;X&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x805A;&#x7C7B;&#x7684;&#x7ED3;&#x679C;&#x8D4B;&#x503C;&#x7ED9;y_pred
+&quot;&quot;&quot;</span>
+clf = KMeans(n_clusters=<span class="hljs-number">3</span>)
+y_pred = clf.fit_predict(X)
+
+<span class="hljs-comment">#&#x8F93;&#x51FA;&#x5B8C;&#x6574;Kmeans&#x51FD;&#x6570;&#xFF0C;&#x5305;&#x62EC;&#x5F88;&#x591A;&#x7701;&#x7565;&#x53C2;&#x6570;</span>
+print(clf)
+<span class="hljs-comment">#&#x8F93;&#x51FA;&#x805A;&#x7C7B;&#x9884;&#x6D4B;&#x7ED3;&#x679C;</span>
+print(<span class="hljs-string">&quot;y_pred = &quot;</span>,y_pred)
+</code></pre>
 </blockquote>
 </li>
+</ul>
+</li>
+</ul>
+<h5 id="&#x5C42;&#x6B21;&#x805A;&#x7C7B;">&#x5C42;&#x6B21;&#x805A;&#x7C7B;</h5>
+<ul>
+<li>&#x5C42;&#x6B21;&#x805A;&#x7C7B;&#x662F;&#x4E00;&#x79CD;&#x5F88;&#x76F4;&#x89C2;&#x7684;&#x7B97;&#x6CD5;&#x3002;&#x987E;&#x540D;&#x601D;&#x4E49;&#x5C31;&#x662F;&#x8981;&#x4E00;&#x5C42;&#x4E00;&#x5C42;&#x5730;&#x8FDB;&#x884C;&#x805A;&#x7C7B;</li>
+<li><strong>&#x5C42;&#x6B21;&#x6CD5;</strong>&#x5148;&#x8BA1;&#x7B97;&#x6837;&#x672C;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;&#xFF0C;&#x6BCF;&#x6B21;&#x5C06;&#x8DDD;&#x79BB;&#x6700;&#x8FD1;&#x7684;&#x70B9;&#x5408;&#x5E76;&#x5230;&#x540C;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x7136;&#x540E;&#xFF0C;&#x518D;&#x8BA1;&#x7B97;&#x7C7B;&#x4E0E;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;&#xFF0C;&#x5C06;&#x8DDD;&#x79BB;&#x6700;&#x8FD1;&#x7684;&#x7C7B;&#x5408;&#x5E76;&#x4E3A;&#x4E00;&#x4E2A;&#x5927;&#x7C7B;&#xFF0C;&#x4E0D;&#x505C;&#x7684;&#x5408;&#x5E76;&#xFF0C;&#x76F4;&#x5230;&#x5408;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x7C7B;<ul>
+<li>&#x7C7B;&#x4E0E;&#x7C7B;&#x7684;&#x8DDD;&#x79BB;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x6709;&#xFF1A;</li>
+<li>&#x6700;&#x77ED;&#x8DDD;&#x79BB;&#x6CD5;&#xFF1A;&#x5C06;&#x7C7B;&#x4E0E;&#x7C7B;&#x7684;&#x8DDD;&#x79BB;&#x5B9A;&#x4E49;&#x4E3A;&#x7C7B;&#x4E0E;&#x7C7B;&#x4E4B;&#x95F4;&#x6837;&#x672C;&#x7684;&#x6700;&#x77ED;&#x8DDD;&#x79BB;</li>
+<li>&#x6700;&#x957F;&#x8DDD;&#x79BB;&#x6CD5;</li>
+<li>&#x4E2D;&#x95F4;&#x8DDD;&#x79BB;&#x6CD5;</li>
+<li>&#x7C7B;&#x5E73;&#x5747;&#x6CD5;</li>
+</ul>
+</li>
+<li>&#x5C42;&#x6B21;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;&#x6839;&#x636E;&#x5C42;&#x6B21;&#x5206;&#x89E3;&#x7684;&#x987A;&#x5E8F;&#x5206;&#x4E3A;&#xFF1A;&#x81EA;&#x4E0B;&#x5E95;&#x5411;&#x4E0A;&#x548C;&#x81EA;&#x4E0A;&#x5411;&#x4E0B;<ul>
+<li>&#x51DD;&#x805A;&#x7684;&#x5C42;&#x6B21;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;(&#x81EA;&#x4E0B;&#x800C;&#x4E0A;&#x6CD5;)</li>
+<li>&#x5206;&#x88C2;&#x7684;&#x5C42;&#x6B21;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;(&#x81EA;&#x4E0A;&#x800C;&#x4E0B;&#x6CD5;)</li>
+</ul>
+</li>
+<li>&#x8BA1;&#x7B97;&#x6D41;&#x7A0B;<ol>
+<li>&#x5C06;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x770B;&#x4F5C;&#x4E00;&#x7C7B;&#xFF0C;&#x8BA1;&#x7B97;&#x4E24;&#x4E24;&#x4E4B;&#x95F4;&#x7684;&#x6700;&#x5C0F;&#x8DDD;&#x79BB;</li>
+<li>&#x5C06;&#x8DDD;&#x79BB;&#x6700;&#x5C0F;&#x7684;&#x4E24;&#x4E2A;&#x7C7B;&#x5408;&#x5E76;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7C7B;</li>
+<li>&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x65B0;&#x7C7B;&#x4E0E;&#x6240;&#x6709;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;</li>
+<li>&#x91CD;&#x590D;2,3&#x76F4;&#x5230;&#x6240;&#x6709;&#x7C7B;&#x5408;&#x5E76;&#x6210;&#x4E00;&#x7C7B;</li>
+</ol>
+</li>
+<li>&#x7279;&#x70B9;<ul>
+<li>&#x51DD;&#x805A;&#x7684;&#x5C42;&#x6B21;&#x805A;&#x7C7B;&#x5E76;&#x6CA1;&#x6709;&#x7C7B;&#x4F3C;K&#x5747;&#x503C;&#x7684;&#x5168;&#x5C40;&#x76EE;&#x6807;&#x51FD;&#x6570;&#xFF0C;&#x6CA1;&#x6709;&#x5C40;&#x90E8;&#x6781;&#x5C0F;&#x95EE;&#x9898;&#x6216;&#x662F;&#x5F88;&#x96BE;&#x9009;&#x62E9;&#x521D;&#x59CB;&#x70B9;&#x7684;&#x95EE;&#x9898;</li>
+<li>&#x5408;&#x5E76;&#x7684;&#x64CD;&#x4F5C;&#x5F80;&#x5F80;&#x662F;&#x6700;&#x7EC8;&#x7684;&#xFF0C;&#x4E00;&#x65E6;&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x7C07;&#x4E4B;&#x540E;&#x5C31;&#x4E0D;&#x4F1A;&#x64A4;&#x9500;</li>
+<li>&#x5F53;&#x7136;&#x5176;&#x8BA1;&#x7B97;&#x5B58;&#x50A8;&#x7684;&#x4EE3;&#x4EF7;&#x662F;&#x6602;&#x8D35;&#x7684;</li>
+</ul>
+</li>
+<li>&#x4F18;&#x70B9;<ul>
+<li>&#x8DDD;&#x79BB;&#x548C;&#x89C4;&#x5219;&#x7684;&#x76F8;&#x4F3C;&#x5EA6;&#x5BB9;&#x6613;&#x5B9A;&#x4E49;&#xFF0C;&#x9650;&#x5236;&#x5C11;</li>
+<li>&#x4E0D;&#x9700;&#x8981;&#x9884;&#x5148;&#x5236;&#x5B9A;&#x805A;&#x7C7B;&#x6570;(&#x4E5F;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;&#x662F;&#x5C06;&#x6240;&#x6709;&#x7684;&#x805A;&#x7C7B;&#x6570;&#x60C5;&#x51B5;&#x90FD;&#x8BA1;&#x7B97;&#x4E86;&#x4E00;&#x904D;&#xFF0C;&#x5230;&#x65F6;&#x5019;&#x7528;&#x7684;&#x65F6;&#x5019;&#x76F4;&#x63A5;&#x53D6;&#x503C;&#x5C31;&#x884C;)</li>
+<li>&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x7C7B;&#x7684;&#x5C42;&#x6B21;&#x5173;&#x7CFB;</li>
+<li>&#x53EF;&#x4EE5;&#x805A;&#x7C7B;&#x6210;&#x5176;&#x4ED6;&#x5F62;&#x72B6;</li>
+</ul>
+</li>
+<li>&#x7F3A;&#x70B9;<ul>
+<li>&#x8BA1;&#x7B97;&#x590D;&#x6742;&#x5EA6;&#x592A;&#x9AD8;</li>
+<li>&#x5947;&#x5F02;&#x503C;&#x4E5F;&#x80FD;&#x4EA7;&#x751F;&#x5F88;&#x5927;&#x5F71;&#x54CD;</li>
+<li>&#x7B97;&#x6CD5;&#x5F88;&#x53EF;&#x80FD;&#x805A;&#x7C7B;&#x6210;&#x94FE;&#x72B6;</li>
+</ul>
+</li>
+<li>&#x4E00;&#x5F20;&#x56FE;&#x6765;&#x89E3;&#x91CA;<ul>
+<li><img src="E:\AI-badou-node\cv\image-20200826232718808.png" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -329,7 +420,7 @@ compactness, labels,centers = cv2.kmeans(data, <span class="hljs-number">2</span
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"图像聚类算法","level":"1.2.3","depth":2,"previous":{"title":"相机模型","level":"1.2.2","depth":2,"path":"cv/相机模型.md","ref":"cv/相机模型.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cv/图像聚类算法.md","mtime":"2020-08-20T15:37:18.848Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-20T15:38:33.281Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"图像聚类算法","level":"1.2.3","depth":2,"previous":{"title":"相机模型","level":"1.2.2","depth":2,"path":"cv/相机模型.md","ref":"cv/相机模型.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cv/图像聚类算法.md","mtime":"2020-08-26T15:34:57.647Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-26T15:35:49.804Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
